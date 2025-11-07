@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,8 +27,35 @@ SECRET_KEY = 'django-insecure-oha6oli2-j@unxhhnj0(0=3b%%657gl&homk&w!-d0yp%f5$za
 DEBUG = True
 
 
-# Allow all hosts
-ALLOWED_HOSTS = ['*']
+# Configure allowed hosts to include localhost and the Codespace hostname when available.
+# Use the environment variable CODESPACE_NAME so we don't hard-code any Codespace-specific value.
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME')
+allowed_hosts = [
+    'localhost',
+    '127.0.0.1',
+]
+if CODESPACE_NAME:
+    # Codespaces forward the container port 8000 at a host like: <CODESPACE_NAME>-8000.app.github.dev
+    allowed_hosts.append(f"{CODESPACE_NAME}-8000.app.github.dev")
+
+ALLOWED_HOSTS = allowed_hosts
+
+# Trust the Codespace origin for CSRF when available
+if CODESPACE_NAME:
+    CSRF_TRUSTED_ORIGINS = [f"https://{CODESPACE_NAME}-8000.app.github.dev"]
+else:
+    CSRF_TRUSTED_ORIGINS = []
+
+# Django test client uses the host 'testserver' by default; include it so in-process
+# requests (Client, RequestFactory) don't raise DisallowedHost.
+if 'testserver' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('testserver')
+
+# When behind the Codespaces proxy, honor the X-Forwarded-Proto header so Django
+# knows requests were originally HTTPS. Do not force SSL redirects here (dev only).
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = False
 
 
 # Application definition
