@@ -75,6 +75,9 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+# Use the custom user model defined in octofit_tracker.models.User
+AUTH_USER_MODEL = 'octofit_tracker.User'
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
