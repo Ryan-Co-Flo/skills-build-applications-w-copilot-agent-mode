@@ -29,7 +29,7 @@ export default function Leaderboard(){
   const [loading, setLoading] = useState(true)
 
   useEffect(()=>{
-    // -8000.app.github.dev/api/workouts/
+    // -8000.app.github.dev/api/leaderboard/
     getLeaderboards()
       .then(payload=>{
         setData(Array.isArray(payload) ? payload : [])

@@ -29,7 +29,7 @@ export default function Users(){
   const [loading, setLoading] = useState(true)
 
   useEffect(()=>{
-    // -8000.app.github.dev/api/workouts/
+    // -8000.app.github.dev/api/users/
     getUsers()
       .then(payload=>{
         setData(Array.isArray(payload) ? payload : [])

@@ -29,7 +29,7 @@ export default function Teams(){
   const [loading, setLoading] = useState(true)
 
   useEffect(()=>{
-    // -8000.app.github.dev/api/workouts/
+    // -8000.app.github.dev/api/teams/
     getTeams()
       .then(payload=>{
         setData(Array.isArray(payload) ? payload : [])
