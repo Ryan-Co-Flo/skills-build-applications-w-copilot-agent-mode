@@ -29,6 +29,7 @@ export default function Activities(){
   const [loading, setLoading] = useState(true)
 
   useEffect(()=>{
+    // -8000.app.github.dev/api/workouts/
     getActivities()
       .then(payload=>{
         setData(Array.isArray(payload) ? payload : [])
