@@ -37,6 +37,7 @@ allowed_hosts = [
 if CODESPACE_NAME:
     # Codespaces forward the container port 8000 at a host like: <CODESPACE_NAME>-8000.app.github.dev
     allowed_hosts.append(f"{CODESPACE_NAME}-8000.app.github.dev")
+    allowed_hosts.append(f"{CODESPACE_NAME}-3000.app.github.dev")
 
 ALLOWED_HOSTS = allowed_hosts
 
