@@ -1,0 +1,33 @@
+/* App-wide styles and small Bootstrap helpers for Octofit Tracker */
+
+body {
+  background-color: #f8f9fa; /* light gray */
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-title {
+  margin: 0;
+}
+
+.card-table {
+  overflow-x: auto;
+}
+
+.mono-pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+  font-size: 0.85rem;
+}
+
+.table-fixed thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+}
+
+/* small helpers */
+.muted-small { font-size: .9rem; color: #6c757d }
