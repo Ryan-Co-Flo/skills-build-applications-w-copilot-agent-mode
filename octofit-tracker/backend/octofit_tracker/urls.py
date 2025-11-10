@@ -15,7 +15,15 @@ Including another URLconf
 """
 import os
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import (
+    ActivityViewSet,
+    WorkoutViewSet,
+    LeaderboardViewSet,
+    TeamViewSet,
+    UserViewSet,
+)
 from django.http import JsonResponse
 
 
@@ -49,4 +57,16 @@ def api_index(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api_index),
+]
+
+# Register API viewsets with a DefaultRouter and mount under /api/
+router = DefaultRouter()
+router.register(r'activities', ActivityViewSet, basename='activities')
+router.register(r'workouts', WorkoutViewSet, basename='workouts')
+router.register(r'leaderboards', LeaderboardViewSet, basename='leaderboards')
+router.register(r'teams', TeamViewSet, basename='teams')
+router.register(r'users', UserViewSet, basename='users')
+
+urlpatterns += [
+    path('api/', include(router.urls)),
 ]
